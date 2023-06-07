@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="WeatherApp" customModuleProvider="target">
+            <connections>
+                <outlet property="searchTableView" destination="PeI-tX-hKW" id="kyh-VH-T1N"/>
+                <outlet property="searchTextField" destination="eVJ-p5-0V1" id="bbL-uh-D3R"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-p5-0V1">
+                    <rect key="frame" x="16" y="79" width="361" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="eVJ-p5-0V1" secondAttribute="height" multiplier="361:44" id="JZc-Fd-cE6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="nvO-0I-uUP"/>
+                    </connections>
+                </textField>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PeI-tX-hKW">
+                    <rect key="frame" x="0.0" y="143" width="393" height="675"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="oC8-Ac-3FX"/>
+                        <outlet property="delegate" destination="-1" id="ENr-HE-8aa"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="PeI-tX-hKW" firstAttribute="top" secondItem="eVJ-p5-0V1" secondAttribute="bottom" constant="20" id="6f3-YN-H1J"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PeI-tX-hKW" secondAttribute="trailing" id="6nI-Wa-93Z"/>
+                <constraint firstItem="PeI-tX-hKW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FIt-kR-yYI"/>
+                <constraint firstItem="eVJ-p5-0V1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Gfu-hi-r1P"/>
+                <constraint firstItem="eVJ-p5-0V1" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.918575" id="L9a-qy-DKg"/>
+                <constraint firstItem="eVJ-p5-0V1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="V8G-Hd-3lP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PeI-tX-hKW" secondAttribute="bottom" id="g8w-jA-kI6"/>
+            </constraints>
+            <point key="canvasLocation" x="3.8167938931297707" y="-15.492957746478874"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

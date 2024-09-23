@@ -20,6 +20,11 @@ final class WeatherViewModel: ObservableObject, WeatherService {
     @Published var isLoading = false
     
     private var cancellables = Set<AnyCancellable>()
+    private let networkManager: NetworkManagerProtocol
+    
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
+    }
     
     func getWeather(lat: Double, long: Double) async {
         
@@ -29,7 +34,7 @@ final class WeatherViewModel: ObservableObject, WeatherService {
         
         let request = WeatherRequest(lat: lat, long: long)
         
-        await NetworkManager.shared.request(endpoint: .getWeather,
+        await networkManager.request(endpoint: .getWeather,
                                                     httpMethod: .GET,
                                                     parameters: request.toJSON,
                                                     type: WeatherData.self)

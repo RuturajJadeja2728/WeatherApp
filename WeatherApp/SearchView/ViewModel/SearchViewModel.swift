@@ -20,6 +20,11 @@ final class SearchViewModel: ObservableObject, SearchService {
     @Published var selectedSearchData : SearchResponse?
     
     private var cancellables = Set<AnyCancellable>()
+    private var networkManager: NetworkManagerProtocol
+    
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
+    }
     
     func setSelectedLocation(location : SearchResponse?){
         self.selectedSearchData = location
@@ -39,7 +44,7 @@ final class SearchViewModel: ObservableObject, SearchService {
         
         let request = SearchRequest(keyword: text)
         
-        await NetworkManager.shared.request(endpoint: Endpoint.place, httpMethod: .GET, parameters: request.toJSON,type: [SearchResponse].self).sink { completion in
+        await networkManager.request(endpoint: Endpoint.place, httpMethod: .GET, parameters: request.toJSON,type: [SearchResponse].self).sink { completion in
             switch completion {
             case .failure(let err):
                 print("Error: \(err.localizedDescription)")

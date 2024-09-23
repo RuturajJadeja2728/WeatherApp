@@ -33,6 +33,12 @@
 		CE39B4AA2C9C8954004DAC01 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE39B4A92C9C8954004DAC01 /* Kingfisher */; };
 		CE39B4AE2C9C9B86004DAC01 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39B4AD2C9C9B86004DAC01 /* MockNetworkManager.swift */; };
 		CE4890112C9CE7F400CD6DDB /* WeatherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4890102C9CE7F400CD6DDB /* WeatherViewModelTests.swift */; };
+		CEF104C52CA093A500B9E376 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104C42CA093A500B9E376 /* Coordinator.swift */; };
+		CEF104C72CA0950200B9E376 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104C62CA0950200B9E376 /* CoordinatorView.swift */; };
+		CEF104C92CA14B0A00B9E376 /* MockWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104C82CA14B0A00B9E376 /* MockWeatherData.swift */; };
+		CEF104CB2CA14CF300B9E376 /* MockSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104CA2CA14CF300B9E376 /* MockSearchData.swift */; };
+		CEF104CD2CA14E0500B9E376 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104CC2CA14E0500B9E376 /* SearchViewModelTests.swift */; };
+		CEF104CF2CA150BF00B9E376 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF104CE2CA150BF00B9E376 /* MockUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +89,12 @@
 		CE39B4AD2C9C9B86004DAC01 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		CE4890102C9CE7F400CD6DDB /* WeatherViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModelTests.swift; sourceTree = "<group>"; };
 		CE9957CE2C9D101400866F9F /* WeatherApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = WeatherApp.xctestplan; sourceTree = "<group>"; };
+		CEF104C42CA093A500B9E376 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CEF104C62CA0950200B9E376 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
+		CEF104C82CA14B0A00B9E376 /* MockWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWeatherData.swift; sourceTree = "<group>"; };
+		CEF104CA2CA14CF300B9E376 /* MockSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchData.swift; sourceTree = "<group>"; };
+		CEF104CC2CA14E0500B9E376 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
+		CEF104CE2CA150BF00B9E376 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +150,7 @@
 				CE39B48B2C9B67BE004DAC01 /* Info.plist */,
 				CE39B4342C9B6387004DAC01 /* WeatherAppApp.swift */,
 				CE39B4362C9B6387004DAC01 /* ContentView.swift */,
+				CEF104BF2CA092A600B9E376 /* Coordinator */,
 				CE39B45E2C9B6398004DAC01 /* WeatherView */,
 				CE39B46A2C9B6460004DAC01 /* SearchView */,
 				CE39B4812C9B65C3004DAC01 /* CommonView */,
@@ -164,6 +177,10 @@
 				CE39B4AD2C9C9B86004DAC01 /* MockNetworkManager.swift */,
 				CE39B4A62C9C8365004DAC01 /* WeatherModelTests.swift */,
 				CE4890102C9CE7F400CD6DDB /* WeatherViewModelTests.swift */,
+				CEF104CC2CA14E0500B9E376 /* SearchViewModelTests.swift */,
+				CEF104C82CA14B0A00B9E376 /* MockWeatherData.swift */,
+				CEF104CA2CA14CF300B9E376 /* MockSearchData.swift */,
+				CEF104CE2CA150BF00B9E376 /* MockUserDefaults.swift */,
 			);
 			path = WeatherAppTests;
 			sourceTree = "<group>";
@@ -305,6 +322,15 @@
 				CE39B4382C9B6388004DAC01 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CEF104BF2CA092A600B9E376 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CEF104C42CA093A500B9E376 /* Coordinator.swift */,
+				CEF104C62CA0950200B9E376 /* CoordinatorView.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,11 +477,13 @@
 				CE39B4842C9B65DE004DAC01 /* ActivityIndicator.swift in Sources */,
 				CE39B49E2C9BA00A004DAC01 /* NetworkErrors.swift in Sources */,
 				CE39B4882C9B6659004DAC01 /* TemperatureView.swift in Sources */,
+				CEF104C52CA093A500B9E376 /* Coordinator.swift in Sources */,
 				CE39B4782C9B6507004DAC01 /* NetworkManager.swift in Sources */,
 				CE39B4372C9B6387004DAC01 /* ContentView.swift in Sources */,
 				CE39B4712C9B6493004DAC01 /* SearchResponse.swift in Sources */,
 				CE39B4802C9B6581004DAC01 /* Constants.swift in Sources */,
 				CE39B4752C9B64CE004DAC01 /* SearchViewModel.swift in Sources */,
+				CEF104C72CA0950200B9E376 /* CoordinatorView.swift in Sources */,
 				CE39B47E2C9B6555004DAC01 /* LocationManager.swift in Sources */,
 				CE39B46F2C9B647F004DAC01 /* SearchRequest.swift in Sources */,
 				CE39B4352C9B6387004DAC01 /* WeatherAppApp.swift in Sources */,
@@ -468,8 +496,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE39B4AE2C9C9B86004DAC01 /* MockNetworkManager.swift in Sources */,
+				CEF104CB2CA14CF300B9E376 /* MockSearchData.swift in Sources */,
+				CEF104CF2CA150BF00B9E376 /* MockUserDefaults.swift in Sources */,
 				CE4890112C9CE7F400CD6DDB /* WeatherViewModelTests.swift in Sources */,
+				CEF104C92CA14B0A00B9E376 /* MockWeatherData.swift in Sources */,
 				CE39B4A72C9C8365004DAC01 /* WeatherModelTests.swift in Sources */,
+				CEF104CD2CA14E0500B9E376 /* SearchViewModelTests.swift in Sources */,
 				CE39B4462C9B6388004DAC01 /* WeatherAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

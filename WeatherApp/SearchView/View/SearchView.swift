@@ -11,8 +11,9 @@ struct SearchView: View {
     
     @State private var searchText: String = ""
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject var searchViewModel = SearchViewModel()
-    var callBackSearchResponse : (_ selectedSearchData : SearchResponse) -> ()
+    var callBackSearchResponse : ((_ selectedSearchData : SearchResponse) -> ())?
     
     var body: some View {
         VStack{
@@ -40,23 +41,22 @@ struct SearchView: View {
                     .stroke(.gray, lineWidth: 1))
             .padding()
             
-            
-            
-            if (searchViewModel.isLoading){
+            if (searchViewModel.isLoading) {
                 Spacer()
                 ProgressView()
             } else {
+                
                 if searchViewModel.searchData.count > 0 {
-                    List(searchViewModel.searchData, id: \.id) { place in
+                    
+                    List(searchViewModel.searchData, id: \.id) { location in
                         
-                        HStack{
-                            Text(searchViewModel.getFlagBy(country: place.country))
-                            Text(place.name + ", " + place.state + ", " + place.country)
-                            
+                        HStack {
+                            Text(searchViewModel.getFlagBy(country: location.country))
+                            Text(location.name + ", " + location.state + ", " + location.country)
                         }
                         .onTapGesture {
-                            callBackSearchResponse(place)
-                            dismiss()
+                            callBackSearchResponse?(location)
+                            coordinator.dismissSheet(location)
                         }
                     }
                 } else {
@@ -74,8 +74,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView { selectedSearchData in
-            
-        }
+        SearchView(callBackSearchResponse: { selectedSearchData in
+        })
     }
 }

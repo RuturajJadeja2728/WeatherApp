@@ -11,7 +11,8 @@ import Combine
 
 class MockNetworkManager: NetworkManager {
     
-    var weatherResponse: AnyPublisher<WeatherData, Error>?
+    var weatherResponse: WeatherData?
+    var mockSearchResponse: [SearchResponse] = []
     var isError = false
     
     override func request<T: Decodable>(endpoint: Endpoint,
@@ -24,6 +25,10 @@ class MockNetworkManager: NetworkManager {
                 promise(.failure(NetworkErrors.invalidResponse))
             } else if let weatherData = self.weatherResponse as? T {
                 promise(.success(weatherData))
+            } else if  let searchResponse = self.mockSearchResponse as? T {
+                promise(.success(searchResponse))
+            } else {
+                promise(.failure(NetworkErrors.unknown))
             }
         }
     }

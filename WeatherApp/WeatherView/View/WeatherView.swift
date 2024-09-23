@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Combine
+
+class EventViewModel: ObservableObject {
+    var eventSubject = PassthroughSubject<Void, Never>()
+}
 
 struct WeatherView: View {
     
-    @ObservedObject var weatherViewModel = WeatherViewModel()
-    @ObservedObject var locationManager = LocationManager()
+    @StateObject var weatherViewModel = WeatherViewModel()
+    @StateObject var locationManager = LocationManager()
     @State private var selectedSearch: SearchResponse?
+    @EnvironmentObject private var coordinator: Coordinator
     
     var body: some View {
         
@@ -26,12 +32,7 @@ struct WeatherView: View {
                     LoadingView(isShowing: weatherViewModel.isLoading) {
                         content
                             .onAppear {
-                                Task {
-                                    locationManager.callBackUpdatedLocation = { currentLocation in
-                                        await weatherViewModel.getSelectedLocation(currentLocation: currentLocation)
-                                    }
-                                    await weatherViewModel.getSelectedLocation(currentLocation: locationManager.lastLocation)
-                                }
+                                fetchWeatherForSelectedLocation()
                             }
                             .navigationTitle("Weather")
                             .padding()
@@ -51,32 +52,52 @@ struct WeatherView: View {
     }
     
     var searchLocationView: some View {
-        HStack {
-            NavigationLink(destination: SearchView(callBackSearchResponse: { location in
+        
+        Button {
+            onSearchClick()
+        } label: {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .renderingMode(.original)
+                    .foregroundColor(.black)
+                    .padding(.leading, 15)
+
+                Text(
+                    (weatherViewModel.weatherResponse?.name ?? "") + ", " + (weatherViewModel.weatherResponse?.sys?.country ?? "")
+                )
+                .foregroundColor(.black)
+                .cornerRadius(15)
+
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: 50)
+            .background(.gray.opacity(0.5))
+            .cornerRadius(15)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(.gray, lineWidth: 1)
+            )
+        }
+    }
+    
+    private func fetchWeatherForSelectedLocation() {
+        
+        Task {
+            locationManager.callBackUpdatedLocation = { currentLocation in
+                await weatherViewModel.getSelectedLocation(currentLocation: currentLocation)
+            }
+            await weatherViewModel.getSelectedLocation(currentLocation: locationManager.lastLocation)
+        }
+    }
+    
+    private func onSearchClick() {
+        
+        coordinator.presentSheet(.search) { (selectedLocation: SearchResponse?) in
+            
+            if let location = selectedLocation {
                 self.selectedSearch = location
                 weatherViewModel.persistLocation(location)
-            })) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .renderingMode(.original)
-                        .foregroundColor(.black)
-                        .padding(.leading, 15)
-                    
-                    Text(
-                        (weatherViewModel.weatherResponse?.name ?? "") + ", " + (weatherViewModel.weatherResponse?.sys?.country ?? "")
-                    )
-                    .foregroundColor(.black)
-                    .cornerRadius(15)
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(.gray.opacity(0.5))
-                .cornerRadius(15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(.gray, lineWidth: 1)
-                )
+                fetchWeatherForSelectedLocation()
             }
         }
     }

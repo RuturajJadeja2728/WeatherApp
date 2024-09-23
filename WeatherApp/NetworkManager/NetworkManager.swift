@@ -18,9 +18,11 @@ enum HttpMethods: String {
     case POST
 }
 
-class NetworkManager {
-    
-    static var shared = NetworkManager()
+protocol NetworkManagerProtocol {
+    func request<T: Decodable>(endpoint: Endpoint, httpMethod: HttpMethods, parameters: [String: Any], type: T.Type) async -> Future<T, Error>
+}
+
+class NetworkManager: NetworkManagerProtocol {
     
     private var cancellables = Set<AnyCancellable>()
     private var session = URLSession.shared

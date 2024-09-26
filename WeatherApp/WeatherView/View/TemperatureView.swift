@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct TemperatureView: View {
     
@@ -16,10 +15,12 @@ struct TemperatureView: View {
         HStack {
             
             VStack {
-                KFImage.url(URL(string: ( "\(API.imgBaseURL)\(weatherResponse?.weather?.first?.icon ?? "01d")@2x.png")))
-                    .loadDiskFileSynchronously()
-                    .cacheMemoryOnly()
-                    .fade(duration: 0.4)
+                AsyncImage(url: URL(string: "\(API.imgBaseURL)\(weatherResponse?.weather?.first?.icon ?? "01d")@2x.png")) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 60, height: 60)
             }
             
             VStack(alignment : .leading) {
@@ -28,7 +29,6 @@ struct TemperatureView: View {
                     .foregroundColor(.black)
             }
         }
-//        .padding([.top, 20)
         
         Text("\((Int)(floor(weatherResponse?.main?.temp ?? 0)))°F")
             .font(.system(size: 50) .bold())
